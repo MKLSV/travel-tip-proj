@@ -28,6 +28,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.close();
                 console.log(mapsMouseEvent.latLng.lat())
                 console.log(mapsMouseEvent.latLng.lng())
+                // addPlace(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng())
             
                 // Create a new InfoWindow.
                 infoWindow = new google.maps.InfoWindow({
