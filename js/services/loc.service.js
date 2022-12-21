@@ -22,6 +22,7 @@ function createLocation(lat, len) {
 function addPlace(place) {
     locs.unshift(place)
     utilService.saveToStorage(LOC_KEY,locs)
+    console.log(locs)
 }
 
 function getLocs() {
