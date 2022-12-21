@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
@@ -12,14 +13,15 @@ body {
 
 h1 {
     margin: 0;
-    font-size: 22px;
+    font-size: xx-large;
+    cursor: pointer;
 }
 
 
 /* HEADER */
 
 header {
-    padding: 20px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     background-color: rgb(228, 169, 42);
@@ -28,6 +30,7 @@ header {
 header input {
     border-radius: 4px;
     height: 30px;
+    width: 90%;
     padding: 0.5em;
     font-size: 1.2em;
     border: none;
@@ -46,6 +49,11 @@ header button {
 
 button:hover {
     cursor: pointer;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 
@@ -80,7 +88,10 @@ button:hover {
 .weather-container {
     background-color: aqua;
     height: 50%;
-    padding: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 

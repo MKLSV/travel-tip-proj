@@ -2,6 +2,7 @@ import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { utilService } from './services/util.service.js'
 
+
 export const appController = {
     renderLocations
 }
@@ -15,6 +16,7 @@ window.onGetUserPos = onGetUserPos
 window.onGoTo = onGoTo
 window.onDelete = onDelete
 window.onSearch = onSearch
+window.onRefresh = onRefresh
 
 function onInit() {
     mapService.initMap()
@@ -36,7 +38,7 @@ function getPosition() {
 
 function onAddMarker() {
     console.log('Adding a marker')
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
+    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 },'here')
 }
 
 function onGetLocs() {
@@ -51,8 +53,10 @@ function onGetUserPos() {
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords)
-            document.querySelector('.user-pos').innerText =
-                `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+            const place = mapService.getLocationName(pos.coords.latitude, pos.coords.longitude)
+            console.log(place)
+            document.querySelector('.user-pos').innerText = place
+                mapService.panTo(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
@@ -87,4 +91,8 @@ function onSearch(ev) {
     const input = ev.target.elements.search
     const value = input.value
     mapService.getSearchLoc(value)
+}
+
+function onRefresh(){
+    window.location = "index.html"
 }

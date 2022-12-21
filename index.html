@@ -11,24 +11,32 @@
 <body>
 
     <header>
-        <h1>TravelTip Starter</h1>
-        <p>You are at: <span class="user-pos"></span></p>
+        <div class="logo">
+            <h1 onclick="onRefresh()">TravelTip Starter</h1>
+            <p>You are at: <span class="user-pos"></span></p>
+        </div>
         <section class="options">
             <form onsubmit="onSearch(event)">
                 <input type="search" name="search" placeholder="Search your place..." value="">
                 <button>🔍</button>
             </form>
-            <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-            <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-            <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+            <div class="options-btn">
+                <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
+                <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+                <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+                <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+            </div>
         </section>
     </header>
 
     <main class="main-content">
         <div class="info">
             <section class="weather-container">
-                im weather
+                <a style="font-size: large; font-weight: bold;">Im Weather</a>
+                <a class="weather">Sunny</a>
+                <a class="temp">Temp</a>
+                <!-- <a class="max-temp">Max-Temp</a>
+                <a class="min-temp">Min-Temp</a> -->
             </section>
             <section class="locations-table">
                 <p>Locations Table:</p> 

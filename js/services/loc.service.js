@@ -1,6 +1,6 @@
 import { utilService } from "./util.service.js"
 import { appController } from "../app.controller.js"
-
+import { mapService } from "./map.service.js"
 
 export const locService = {
     getLocs,
@@ -30,9 +30,11 @@ function createLocation(name, lat, lng) {
 }
 
 function addPlace(place) {
+    console.log(place)
     locs.push(place)
     utilService.saveToStorage(LOC_KEY, locs)
     appController.renderLocations()
+    mapService.addMarker({ lat: place.lat, lng: place.lng }, place.name)
     console.log(locs)
 }
 
@@ -55,6 +57,6 @@ function deleteLoc(id) {
     appController.renderLocations()
 }
 
-function findLoc(id){
+function findLoc(id) {
     return locs.find(loc => loc.id === id)
 }
