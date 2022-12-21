@@ -3,20 +3,23 @@ import { locService } from "./loc.service.js"
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    goTo,
+    getSearchLoc
 }
 
 
 // Var that is used throughout this Module (not global)
 var gMap
+const API_KEY = 'AIzaSyBBuQbfaEp7dRxXAwVUE-uL5UdxE1um5fs' //TODO: Enter your API Key
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
     return _connectGoogleApi()
-    .then(() => {
-        console.log('google available')
-        gMap = new google.maps.Map(
-            document.querySelector('#map'), {
+        .then(() => {
+            console.log('google available')
+            gMap = new google.maps.Map(
+                document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
@@ -24,24 +27,26 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             let infoWindow = new google.maps.InfoWindow({
                 content: "Click the map to get Lat/Lng!",
                 position: { lat, lng },
-              });
+            });
             gMap.addListener("click", (mapsMouseEvent) => {
                 // Close the current InfoWindow.
                 infoWindow.close();
+                const name = prompt('Name Location')
+                console.log(name)
                 console.log(mapsMouseEvent.latLng.lat())
                 console.log(mapsMouseEvent.latLng.lng())
-                locService.createLocation(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng())
-            
+                locService.createLocation(name,mapsMouseEvent.latLng.lat(), mapsMouseEvent.latLng.lng())
+
                 // Create a new InfoWindow.
                 infoWindow = new google.maps.InfoWindow({
-                  position: mapsMouseEvent.latLng,
+                    position: mapsMouseEvent.latLng,
                 });
                 infoWindow.setContent(
-                  JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
-              });
-              return gMap
+            });
+            return gMap
         })
 }
 
@@ -62,7 +67,6 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyBBuQbfaEp7dRxXAwVUE-uL5UdxE1um5fs' //TODO: Enter your API Key
     console.log(API_KEY)
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
@@ -73,4 +77,23 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function goTo(id) {
+    const location = locService.findLoc(id)
+    console.log(location)
+    panTo(location.lat, location.lng)
+}
+
+function getSearchLoc(val) {
+    console.log(val)
+    const address = val
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            const coordinates = data.results[0].geometry.location
+            panTo(coordinates.lat,coordinates.lng)
+            locService.createLocation(val,coordinates.lat,coordinates.lng)
+        })
+
 }

@@ -6,7 +6,8 @@ export const locService = {
     getLocs,
     createLocation,
     getKEY,
-    deleteLoc
+    deleteLoc,
+    findLoc
 }
 const LOC_KEY = 'locDB'
 
@@ -21,8 +22,7 @@ else {
     utilService.saveToStorage(LOC_KEY, locs)
 }
 
-function createLocation(lat, lng) {
-    const name = utilService.randomLocName()
+function createLocation(name, lat, lng) {
     const id = utilService.makeId()
     const time = Date.now()
     const place = { id, name, lat, lng, time }
@@ -30,7 +30,7 @@ function createLocation(lat, lng) {
 }
 
 function addPlace(place) {
-    locs.unshift(place)
+    locs.push(place)
     utilService.saveToStorage(LOC_KEY, locs)
     appController.renderLocations()
     console.log(locs)
@@ -50,7 +50,11 @@ function getKEY() {
 
 function deleteLoc(id) {
     const index = locs.findIndex(loc => loc.id === id)
-    locs.splice(index,1)
+    locs.splice(index, 1)
     utilService.saveToStorage(LOC_KEY, locs)
     appController.renderLocations()
+}
+
+function findLoc(id){
+    return locs.find(loc => loc.id === id)
 }
