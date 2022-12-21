@@ -1,5 +1,3 @@
-
-
 * {
     box-sizing: border-box;
 }
@@ -35,6 +33,7 @@ header input {
     border: none;
     transition: 0.5s;
 }
+
 header input:focus {
     background-color: antiquewhite;
     padding: 0.5em 1em;
@@ -54,28 +53,54 @@ button:hover {
 
 .main-content {
     display: flex;
-    flex-wrap: wrap-reverse; 
+    padding: 30px;
+    justify-content: space-between;
+    gap: 30px;
 }
 
 
 /* MAP */
 
-.map-container{
-    width: 100%;
-    height: 400px;
+.map-container {
+    width: 65%;
+    height: 75vh;
 }
 
+/* INFO */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%;
+    height: 75vh;
+}
 
 /* WEATHER */
 
-.weather-container{
-background-color: aqua;
+.weather-container {
+    background-color: aqua;
+    height: 50%;
+    padding: 10px;
 }
 
 
 /* LOCATIONS */
 
-.locations-table{
+.locations-table {
     background-color: rgb(65, 131, 78);
+    
+    padding: 10px;
 
+}
+.locs{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.location{
+    display: flex;
+    width: 100%;
+    background-color: aquamarine;
+    padding: 7px;
+    justify-content: space-between;
 }
