@@ -26,6 +26,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             gMap.addListener("click", (mapsMouseEvent) => {
                 // Close the current InfoWindow.
                 infoWindow.close();
+                console.log(mapsMouseEvent.latLng.lat())
+                console.log(mapsMouseEvent.latLng.lng())
             
                 // Create a new InfoWindow.
                 infoWindow = new google.maps.InfoWindow({
