@@ -1,5 +1,5 @@
 
-export const utilsService ={
+export const utilService ={
     saveToStorage,
     loadFromStorage,
     makeId,
@@ -34,5 +34,5 @@ function getRandomIntInclusive(min, max) {
 }
 
 function randomLocName() {
-    return gPetNames[parseInt(Math.random() * gLocNames.length)]
+    return gLocNames[parseInt(Math.random() * gLocNames.length)]
 }
